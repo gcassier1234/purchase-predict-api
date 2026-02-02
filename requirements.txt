@@ -5,4 +5,4 @@ scikit-learn==1.8.0
 mlflow==3.9.0
 google-cloud-storage==3.8.0
 lightgbm==4.6.0
-gunicorn==24.0.0
+gunicorn==23.0.0
