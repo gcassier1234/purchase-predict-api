@@ -20,6 +20,9 @@ class Model():
     def load_model(self):
         client = MlflowClient()
         print(f"connecting to mlflow server: {os.getenv('MLFLOW_SERVER')}")
+        print("eeeeeeeeeeeeeeeeeeeeee")
+        print("eeeeeeeeeeeeeeeeeeeeee")
+        print("eeeeeeeeeeeeeeeeeeeeee")
         experiments = client.search_experiments()
         model_version = client.get_model_version_by_alias(name=os.getenv("MLFLOW_REGISTRY_NAME"), alias="staging")
         pipeline_path = client.download_artifacts(model_version.run_id, "transform_pipeline.pkl")
