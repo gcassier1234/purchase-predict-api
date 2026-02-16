@@ -8,6 +8,6 @@ steps:
    args: ['push', 'gcr.io/$PROJECT_ID/purchase-predict-api:$SHORT_SHA']
  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk' 
    entrypoint: gcloud
-   args: ['run', 'deploy', 'purchase-predict-api', '--image', 'gcr.io/$PROJECT_ID/purchase-predict-api:$SHORT_SHA', '--region', 'europe-west9', '--plateform', 'managed']
+   args: ['run', 'deploy', 'purchase-predict-api', '--image', 'gcr.io/$PROJECT_ID/purchase-predict-api:$SHORT_SHA', '--region', 'europe-west9', '--platform', 'managed']
 images:
  - gcr.io/$PROJECT_ID/purchase-predict-api:$SHORT_SHA
