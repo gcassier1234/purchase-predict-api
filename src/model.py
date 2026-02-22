@@ -1,10 +1,13 @@
 import os 
 import joblib
 import mlflow
+import logging
 
 from mlflow.tracking import MlflowClient
 
 ENV = os.getenv('ENV')
+
+LOGGER = logging.getLogger()
 
 mlflow.set_tracking_uri(os.getenv('MLFLOW_SERVER'))
 
@@ -18,14 +21,15 @@ class Model():
         self.load_model()
 
     def load_model(self):
+        LOGGER.info("loading model from Mlflow")
         client = MlflowClient()
-        experiments = client.search_experiments()
         model_version = client.get_model_version_by_alias(name=os.getenv("MLFLOW_REGISTRY_NAME"), alias="staging")
         pipeline_path = client.download_artifacts(model_version.run_id, "transform_pipeline.pkl")
         self.model = mlflow.sklearn.load_model("runs:/{}/model".format(model_version.run_id))
-
+            
         self.transform_pipeline = joblib.load(pipeline_path)
-
+        LOGGER.info("model sucessfully loaded")
+        
     def predict(self, X):
         if self.model:
             if self.transform_pipeline:
